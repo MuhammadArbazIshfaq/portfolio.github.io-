@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TimeTable</title>
+    <link rel="stylesheet" href="style.css">
+
+   <style>
+         .form-center{
+            border-radius: 5px;
+            padding: 20px;
+        }
+        label{
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: brown;
+        }
+        input[type=text]
+        {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ff004f;
+        border-radius: 4px;
+        margin-top: 6px;
+        margin-bottom: 16px;
+        resize: vertical;
+        color:#ff004f;
+        }
+        form button input{
+            background-color:#ff004f;
+            color:white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+      
+   </style> 
+</head>
+<body>
+    <section class="header">
+    
+     <a href="./index.html" style="margin-left:100px ;" class="btn btn2">Back to Portfolio </a>
+    </section>
+    <h3 class="headings">MY ACADEMICS TIME TABLE</h3>
+  
+    <input type="text" name="" id="inputvalues" placeholder="   Enter your Search" onkeyup=
+    "searchfromtable()">
+    <div class="tablecontainer">
+       <table id="tabledata">
+    <thead>
+          <tr>
+              <th>Days</th>
+              <th>Room no</th>
+              <th colspan="7px">Time slots and subject</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr>
+              <td>Monday</td>
+              <td>A-305</td>
+              <td colspan="4px" align="center">11:30 to 12:50
+                  <br>
+                  Numerical Computing
+              </td>
+              <td>
+                  <a href="" onclick="edit_data(this)" id="editbutton">EDIT</a>
+              </td>
+              <td>
+                <a href="" onclick="delete_data(this)">DELETE</a>
+            </td>
+          </tr>
+          <tr>
+              <td>Tuesday</td>
+              <td>C-309</td>
+              <td align="center">1:00 to 2:20
+                <br>
+                Web Programing
+            </td>
+            <td colspan = "3px" align="center">3:55 to 5:15
+                <br>
+                Computer Networks
+            </td>
+            <td>
+                <a href="" onclick="edit_data(this)" id="editbutton">EDIT</a>
+            </td>
+            <td>
+                <a href="" onclick="delete_data(this)">DELETE</a>
+            </td>
+          </tr>
+          <tr>
+            <td>Wednesday</td>
+            <td>A-305</td>
+            <td align="center">11:30 to 12:50
+                <br>
+                Numerical Computing
+            </td>
+            <td colspan = "3px" align="center">1:00 to 2:20
+                <br>
+                Automata
+            </td>
+            <td>
+                <a href="" onclick="edit_data(this)" id="editbutton">EDIT</a>
+            </td>
+            <td>
+                <a href="" onclick="delete_data(this)">DELETE</a>
+            </td>
+        </tr>
+        <tr>
+            <td>Thursday</td>
+            <td>A-305</td>
+            <td align="center">11:30 to 12:50
+                <br>
+                Web Programing
+            </td>
+            <td colspan = "3px" align="center">3:55 to 5:15
+                <br>
+                Computer Networks
+            </td>
+            <td>
+                <a href="" onclick="edit_data(this)" id="editbutton">EDIT</a>
+            </td>
+            <td>
+                <a href="" onclick="delete_data(this)">DELETE</a>
+            </td>
+        </tr>
+        <tr>
+            <td class="last">Friday</td>
+            <td class="last">A-305</td>
+            <td align="center" class="last">8:30 to 11:20
+                <br>
+                Computer Networks Lab
+            </td>
+            <td align="center" class="last">11:30 to 12:50
+                <br>
+                Process Mining
+            </td>
+            <td colspan="2px" align="center" class="last">2:00 to 4:50
+                <br>
+                SDA
+            </td>
+            <td>
+                <a href="" onclick="edit_data(this)" id="editbutton">EDIT</a>
+            </td>
+            <td>
+                <a href="" class="last" onclick="delete_data(this)">DELETE</a>
+            </td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+<h3 class="headings">ENTER A NEW ROW OF ACADEMICS TIME TABLE</h3>
+<div class="form-center">
+    <form onsubmit="event.preventDefault();">
+        <label>Days</label>
+        <input type="text" id="days">
+        <label>Room No</label>
+        <input type="text" id="room">
+        <label>Subject & time</label>
+        <input type="text" id="subject">
+        <button><input type="submit" onclick="ADDTIMETABLE();" name="" id="button"></button>
+        <button><input type="reset" name="" id=""></button>
+    </form>
+</div>  
+<script >
+
+
+
+function searchfromtable()
+{
+    let values1 =  document.getElementById('inputvalues').value;
+    let values2 = document.getElementById('tabledata');
+    let tablerow = tabledata.getElementsByTagName('tr');
+    let i = 0;
+    let j = 0;
+    while(i<tablerow.length)
+    {
+        
+        let tablecolumn=tablerow[i].getElementsByTagName('td')[0];
+        let tablecolumn2=tablerow[j].getElementsByTagName('td')[2];
+        if (tablecolumn||tablecolumn2)
+        {
+            let txtval = tablecolumn.textContent || tablecolumn.innerHTML;
+            let txtval2 = tablecolumn2.textContent || tablecolumn2.innerHTML;
+            if (txtval.indexOf(values1)>-1||txtval2.indexOf(values1)>-1)
+            {
+                tablerow[i].style.display="";
+            }
+            else
+            {
+                tablerow[i].style.display="none";
+            }
+        }
+        j++;
+        i++;
+    }
+    j=0;
+    i=0;
+}
+var DAYS = [];
+var ROOMS = [];
+var SUBJECT = [];
+var TIME = [];
+var n = 1;
+var x = 0;
+function ADDTIMETABLE()
+{
+    var ADDROW = document.getElementById("tabledata");
+    var NEWROW = ADDROW.insertRow(n);
+    DAYS[x] = document.getElementById("days").value;
+    ROOMS[x] = document.getElementById("room").value;
+    SUBJECT[x] = document.getElementById("subject").value;
+    var cel1 = NEWROW.insertCell(0);
+    var cel2 = NEWROW.insertCell(1);
+    var cel3 = NEWROW.insertCell(2);
+    var cel4 = NEWROW.insertCell(3);
+    var cel5 = NEWROW.insertCell(4);
+    cel1.innerHTML = DAYS[x];
+    cel2.innerHTML = ROOMS[x];
+    cel3.innerHTML = SUBJECT[x];
+    cel4.innerHTML = `<a href="" onclick="edit_data(this)" id="editbutton">EDIT</a>`;
+    cel5.innerHTML = `<a href="" onclick="newdeletedata()">DELETE</a>`;
+    n++;
+    x++;
+}
+function newdeletedata()
+{
+    var ADDROW = document.getElementById("tabledata");
+    var NEWROW = ADDROW.insertRow(n);
+    DAYS[x] = document.getElementById("days").value;
+    ROOMS[x] = document.getElementById("room").value;
+    SUBJECT[x] = document.getElementById("subject").value;
+    var cel1 = NEWROW.insertCell(0);
+    var cel2 = NEWROW.insertCell(1);
+    var cel3 = NEWROW.insertCell(2);
+    var cel4 = NEWROW.insertCell(3);
+    var cel5 = NEWROW.insertCell(4);
+    cel1.innerHTML = "";
+    cel2.innerHTML = "";
+    cel3.innerHTML = "";
+    n++;
+    x++;
+}
+function delete_data(stud)
+{
+    var temp = stud.parentNode.parentNode;
+    temp.parentNode.removeChild(temp);
+}
+function edit_data(no)
+{
+ document.getElementById("editbutton"+no).style.display="none";
+ var dayss=document.getElementById("days"+no);
+ var rooms=document.getElementById("room"+no);
+ var subjects=document.getElementById("subject"+no);
+	
+ var nwenamedata=dayss.innerHTML;
+ var nweroomdata=rooms.innerHTML;
+ var nwesubject=subjects.innerHTML;
+	
+ dayss.innerHTML="<input type='text' id='days"+no+"' value='"+name_data+"'>";
+ rooms.innerHTML="<input type='text' id='room"+no+"' value='"+country_data+"'>";
+ subjects.innerHTML="<input type='text' id='subjects"+no+"' value='"+age_data+"'>";
+}
+
+
+
+
+</script>
+</body>
+</html>
